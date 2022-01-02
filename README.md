@@ -13,5 +13,6 @@ yarn start:prod
 For Docker Use (Includes database connections)
 
 ```
+yarn install
 yarn docker:run
 ```
