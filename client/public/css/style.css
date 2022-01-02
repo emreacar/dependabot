@@ -1,0 +1,50 @@
+body {
+  color: #7c7f83;
+  font-family: 'Roboto Slab', serif;
+  background: #e0f2f1;
+  font-weight: 200;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.small-text {
+  font-size: 80%;
+}
+
+button,
+.btn {
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.gradient-text-success {
+  background: -webkit-linear-gradient(#ffeb3b, #4caf50);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-danger {
+  background: -webkit-linear-gradient(#e91e63, #ff5722);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tracker-form {
+  border-radius: 12px;
+}

@@ -4,14 +4,21 @@ import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
+import { ErrorExceptionFilter } from './Filter/error-exception.filter';
+import { ResponseTransformInterceptor } from './Interceptor/response-transform.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  /**
-   * Sperate Client and Backend
-   */
+  /** Sperate Client and Backend */
   app.setGlobalPrefix('api', { exclude: ['/'] });
 
+  /** client-side config */
+  app.useStaticAssets(join(__dirname, '..', 'client/public'));
+  app.setBaseViewsDir(join(__dirname, '..', 'client/views'));
+  app.setViewEngine('hbs');
+
+  app.useGlobalInterceptors(new ResponseTransformInterceptor());
+  app.useGlobalFilters(new ErrorExceptionFilter());
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -27,12 +34,6 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('apiDoc', app, document);
-
-  /** client-side config */
-  app.useStaticAssets(join(__dirname, '..', 'client/public'));
-  app.setBaseViewsDir(join(__dirname, '..', 'client/views'));
-  app.setViewEngine('hbs');
-  /** client-side config */
 
   await app.listen(process.env.APP_PORT);
 }

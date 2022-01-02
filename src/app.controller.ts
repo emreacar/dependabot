@@ -8,8 +8,10 @@ export class AppController {
   @Get()
   @Render('index')
   main() {
-    const apiUrl = this.configService.get<string>('apiUrl');
+    const appUrl = this.configService.get<string>('appUrl');
 
-    return { apiUrl };
+    return {
+      appUrl,
+    };
   }
 }
